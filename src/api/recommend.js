@@ -2,14 +2,38 @@ import jsonp from './jsonp';
 import { URL, PARAM, OPTION } from './config';
 
 export function getCarousel() {
-  const data = Object.assign({}, PARAM, {
-    g_tk: 701075963,
-    uin: 0,
-    platform: 'h5',
-    needNewCode: 1,
-    _: new Date().getTime(),
-  });
-  return jsonp(URL.carousel, data, OPTION);
+  // const data = Object.assign({}, PARAM, {
+  //   g_tk: 701075963,
+  //   uin: 0,
+  //   platform: 'h5',
+  //   needNewCode: 1,
+  //   _: new Date().getTime(),
+  // });
+  // return jsonp(URL.carousel, data, OPTION);
+
+  let data = {
+    code: 0,
+    data: {
+      slider: [
+        {
+          id: 1,
+          linkUrl: 'https://y.qq.com/?ADTAG=myqq#type=index',
+          picUrl: 'https://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/3416097.jpg',
+        },
+        {
+          id: 2,
+          linkUrl: 'https://y.qq.com/?ADTAG=myqq#type=index',
+          picUrl: 'https://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/3424815.jpg',
+        },
+        {
+          id: 3,
+          linkUrl: 'https://y.qq.com/?ADTAG=myqq#type=index',
+          picUrl: 'https://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/3424605.jpg',
+        },
+      ],
+    },
+  };
+  return Promise.resolve(data);
 }
 
 /*

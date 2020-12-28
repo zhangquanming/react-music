@@ -1,17 +1,11 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Redirect,
-  NavLink,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Redirect, NavLink } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 
 import router from '../router';
 
 import logo from '../assets/imgs/logo.png';
 import '../assets/stylus/reset.styl';
-import '../assets/stylus/font.styl';
 import style from './App.styl?module';
 
 class App extends React.Component {

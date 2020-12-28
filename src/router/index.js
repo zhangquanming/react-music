@@ -10,9 +10,7 @@ const withSuspense = Component => {
   );
 };
 
-const Recommend = withSuspense(
-  lazy(() => import('../views/recommend/Recommend'))
-);
+const Recommend = withSuspense(lazy(() => import('../views/recommend/Recommend')));
 const Ranking = withSuspense(lazy(() => import('../views/ranking/Ranking')));
 const Singer = withSuspense(lazy(() => import('../views/singer/Singer')));
 const Search = withSuspense(lazy(() => import('../views/search/Search')));
@@ -35,11 +33,7 @@ const router = [
     component: Search,
   },
   {
-    component: () => (
-      <div style={{ marginTop: 100, textAlign: 'center' }}>
-        请求的页面不存在
-      </div>
-    ),
+    component: () => <div style={{ marginTop: 100, textAlign: 'center' }}>请求的页面不存在</div>,
   },
 ];
 

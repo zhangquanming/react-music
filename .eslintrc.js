@@ -24,12 +24,7 @@ module.exports = {
     window: true,
     node: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'prettier',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'prettier', 'plugin:prettier/recommended'],
   plugins: ['prettier', 'react', 'jsx-a11y', 'import', 'react-hooks'],
   // 定义自己的规则
   rules: {
@@ -39,6 +34,7 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
+        printWidth: 150, // 换行字符串阈值
         semi: true, // 句末加分号
         singleQuote: true, // 用单引号
         trailingComma: 'es5', // 最后一个对象元素加逗号

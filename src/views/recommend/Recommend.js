@@ -1,5 +1,6 @@
 import React from 'react';
 import Swiper from 'swiper';
+import { Route } from 'react-router-dom';
 
 import { getCarousel, getNewAlbum } from '../../api/recommend';
 import { CODE_SUCCESS } from '../../api/config';
@@ -7,6 +8,7 @@ import * as AlbumModel from '../../models/album';
 import Scroll from '../../components/scroll/Scroll';
 import Loading from '../../components/loading/Loading';
 import LazyLoad, { forceCheck } from 'react-lazyload';
+import Album from '../album/Album';
 
 import style from './recommend.styl?module';
 import 'swiper/dist/css/swiper.css';
@@ -14,11 +16,7 @@ import 'swiper/dist/css/swiper.css';
 class Recommend extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loading: true,
-      sliderList: [],
-      newAlbums: [],
-    };
+    this.state = { loading: true, sliderList: [], newAlbums: [] };
   }
 
   componentDidMount() {
@@ -54,10 +52,7 @@ class Recommend extends React.Component {
         // 根据发布时间降序排列
         let albumList = res.albumlib.data.list;
         albumList.sort((a, b) => {
-          return (
-            new Date(b.public_time).getTime() -
-            new Date(a.public_time).getTime()
-          );
+          return new Date(b.public_time).getTime() - new Date(a.public_time).getTime();
         });
         this.setState({
           loading: false,
@@ -74,28 +69,25 @@ class Recommend extends React.Component {
     };
   }
 
+  toAlbumDetail(url) {
+    /* scroll组件会派发一个点击事件，不能使用链接跳转 */
+    return () => {
+      this.props.history.push({
+        pathname: url,
+      });
+    };
+  }
+
   render() {
+    let { match } = this.props;
     let albums = this.state.newAlbums.map(item => {
       // 通过函数创建专辑对象
       let album = AlbumModel.createAlbumByList(item);
       return (
-        <div
-          className={`${style.albumWrapper} skin-album-wrapper`}
-          key={album.mId}
-        >
+        <div className={`${style.albumWrapper} skin-album-wrapper`} key={album.mId} onClick={this.toAlbumDetail(`${match.url + '/' + album.mId}`)}>
           <div className={style.left}>
-            <LazyLoad
-              height={60}
-              placeholder={
-                <img src={require('../../assets/imgs/music.png')} alt="music" />
-              }
-            >
-              <img
-                src={album.img}
-                width="100%"
-                height="100%"
-                alt={album.name}
-              />
+            <LazyLoad height={60} placeholder={<img src={require('../../assets/imgs/music.png')} alt="music" />}>
+              <img src={album.img} width="100%" height="100%" alt={album.name} />
             </LazyLoad>
           </div>
           <div className={style.right}>
@@ -120,16 +112,8 @@ class Recommend extends React.Component {
                 {this.state.sliderList.map(slider => {
                   return (
                     <div className="swiper-slide" key={slider.id}>
-                      <div
-                        className="slider-nav"
-                        onClick={this.toLink(slider.linkUrl)}
-                      >
-                        <img
-                          src={slider.picUrl}
-                          width="100%"
-                          height="100%"
-                          alt="推荐"
-                        />
+                      <div className="slider-nav" onClick={this.toLink(slider.linkUrl)}>
+                        <img src={slider.picUrl} width="100%" height="100%" alt="推荐" />
                       </div>
                     </div>
                   );
@@ -138,14 +122,13 @@ class Recommend extends React.Component {
               <div className="swiper-pagination"></div>
             </div>
             <div className={style.albumContainer}>
-              <h1 className={`${style.title} skin-recommend-title`}>
-                最新专辑
-              </h1>
+              <h1 className={`${style.title} skin-recommend-title`}>最新专辑</h1>
               <div className={style.albumList}>{albums}</div>
             </div>
           </div>
         </Scroll>
         <Loading title="正在加载..." show={this.state.loading} />
+        <Route path={`${match.url + '/:id'}`} component={Album} />
       </div>
     );
   }
