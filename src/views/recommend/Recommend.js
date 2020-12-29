@@ -8,7 +8,7 @@ import * as AlbumModel from '../../models/album';
 import Scroll from '../../components/scroll/Scroll';
 import Loading from '../../components/loading/Loading';
 import LazyLoad, { forceCheck } from 'react-lazyload';
-import Album from '../album/Album';
+import Album from '../../containers/Album';
 
 import style from './recommend.styl?module';
 import 'swiper/dist/css/swiper.css';

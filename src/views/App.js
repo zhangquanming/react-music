@@ -8,6 +8,8 @@ import logo from '../assets/imgs/logo.png';
 import '../assets/stylus/reset.styl';
 import style from './App.styl?module';
 
+import Player from '../containers/Player';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -58,6 +60,8 @@ class App extends React.Component {
               {renderRoutes(router)}
             </Switch>
           </div>
+
+          <Player />
         </div>
       </Router>
     );
