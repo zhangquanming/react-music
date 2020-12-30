@@ -7,10 +7,21 @@ import * as ActionTypes from './actionTypes';
 
 //需要存储的初始状态数据
 const initialState = {
+  skin: '',
   showStatus: false,
   song: {},
   songs: [],
 };
+
+// 设置皮肤
+function skin(skin = initialState.skin, action) {
+  switch (action.type) {
+    case ActionTypes.SET_SKIN:
+      return action.skin;
+    default:
+      return skin;
+  }
+}
 
 // 显示或隐藏播放状态
 function showStatus(showStatus = initialState.showStatus, action) {
@@ -58,6 +69,7 @@ function songs(songs = initialState.songs, action) {
 
 // 合并Reducer
 const reducer = combineReducers({
+  skin,
   showStatus,
   song,
   songs,

@@ -8,7 +8,7 @@ import logo from '../assets/imgs/logo.png';
 import '../assets/stylus/reset.styl';
 import style from './App.styl?module';
 
-import Player from '../containers/Player';
+import MusicPlayer from './play/MusicPlayer';
 
 class App extends React.Component {
   constructor(props) {
@@ -61,7 +61,7 @@ class App extends React.Component {
             </Switch>
           </div>
 
-          <Player />
+          <MusicPlayer />
         </div>
       </Router>
     );

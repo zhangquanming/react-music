@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './propress.styl';
+import './progress.styl';
 
 class Propgress extends React.Component {
   constructor(props) {
@@ -89,7 +89,7 @@ class Propgress extends React.Component {
     if (!progress) progress = 0;
     // 按钮left值
     let progressButtonOffsetLeft = 0;
-    if (!this.progressBarWidth) {
+    if (this.progressBarWidth) {
       progressButtonOffsetLeft = progress * this.progressBarWidth;
     }
 

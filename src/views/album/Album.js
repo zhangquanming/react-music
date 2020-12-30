@@ -76,6 +76,17 @@ class Album extends React.Component {
     };
   }
   /**
+   * 播放全部
+   */
+  playAll = () => {
+    if (this.state.songs.length > 0) {
+      //添加播放歌曲列表
+      this.props.setSongs(this.state.songs);
+      this.props.changeCurrentSong(this.state.songs[0]);
+      this.props.showMusicPlayer(true);
+    }
+  };
+  /**
    * 监听scroll
    */
   scroll({ y }) {
@@ -122,7 +133,7 @@ class Album extends React.Component {
               <div className={style.filter}></div>
             </div>
             <div ref={this.playButtonWrapperRef} className={style.playWrapper}>
-              <div className={style.playButton}>
+              <div className={style.playButton} onClick={this.playAll}>
                 <i className="icon-play"></i>
                 <span>播放全部</span>
               </div>
