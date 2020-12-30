@@ -1,14 +1,12 @@
 import React from 'react';
+import { renderRoutes } from 'react-router-config';
+import LazyLoad, { forceCheck } from 'react-lazyload';
 import Swiper from 'swiper';
-import { Route } from 'react-router-dom';
-
 import { getCarousel, getNewAlbum } from '../../api/recommend';
 import { CODE_SUCCESS } from '../../api/config';
-import * as AlbumModel from '../../models/album';
 import Scroll from '../../components/scroll/Scroll';
 import Loading from '../../components/loading/Loading';
-import LazyLoad, { forceCheck } from 'react-lazyload';
-import Album from '../../containers/Album';
+import * as AlbumModel from '../../models/album';
 
 import style from './recommend.styl?module';
 import 'swiper/dist/css/swiper.css';
@@ -79,7 +77,7 @@ class Recommend extends React.Component {
   }
 
   render() {
-    let { match } = this.props;
+    let { match, route } = this.props;
     let albums = this.state.newAlbums.map(item => {
       // 通过函数创建专辑对象
       let album = AlbumModel.createAlbumByList(item);
@@ -128,7 +126,7 @@ class Recommend extends React.Component {
           </div>
         </Scroll>
         <Loading title="正在加载..." show={this.state.loading} />
-        <Route path={`${match.url + '/:id'}`} component={Album} />
+        {renderRoutes(route.routes)}
       </div>
     );
   }

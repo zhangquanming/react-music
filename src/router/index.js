@@ -15,10 +15,18 @@ const Ranking = withSuspense(lazy(() => import('../views/ranking/Ranking')));
 const Singer = withSuspense(lazy(() => import('../views/singer/Singer')));
 const Search = withSuspense(lazy(() => import('../views/search/Search')));
 
+const Album = withSuspense(lazy(() => import('../containers/Album')));
+
 const router = [
   {
     path: '/recommend',
     component: Recommend,
+    routes: [
+      {
+        path: '/recommend/:id',
+        component: Album,
+      },
+    ],
   },
   {
     path: '/ranking',
