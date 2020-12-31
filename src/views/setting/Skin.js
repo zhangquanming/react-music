@@ -3,6 +3,7 @@ import { CSSTransition } from 'react-transition-group';
 import { skin, setSkinStyle } from '../../utils/skin';
 
 import style from './skin.styl?module';
+import playImg from '../../assets/imgs/play_bg.jpg';
 
 class Skin extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class Skin extends React.Component {
           this.skinRef.current.style.display = 'none';
         }}
       >
-        <div className={style.musicSkin} ref={this.skinRef}>
+        <div className={style.musicSkin} style={{ backgroundImage: `url(${playImg})` }} ref={this.skinRef}>
           <div className={style.header}>
             皮肤中心
             <span
