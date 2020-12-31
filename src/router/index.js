@@ -13,7 +13,7 @@ const withSuspense = Component => {
 const Recommend = withSuspense(lazy(() => import('../views/recommend/Recommend')));
 const Rankings = withSuspense(lazy(() => import('../views/ranking/Ranking')));
 const SingerList = withSuspense(lazy(() => import('../views/singer/SingerList')));
-const Search = withSuspense(lazy(() => import('../views/search/Search')));
+const Search = withSuspense(lazy(() => import('../containers/Search')));
 
 const Album = withSuspense(lazy(() => import('../containers/Album')));
 const Ranking = withSuspense(lazy(() => import('../containers/Ranking')));
@@ -53,6 +53,16 @@ const router = [
   {
     path: '/search',
     component: Search,
+    routes: [
+      {
+        path: '/search/album/:id',
+        component: Album,
+      },
+      {
+        path: '/search/singer/:id',
+        component: Singer,
+      },
+    ],
   },
   {
     component: () => <div style={{ marginTop: 100, textAlign: 'center' }}>请求的页面不存在</div>,
