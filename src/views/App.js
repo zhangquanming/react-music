@@ -3,17 +3,20 @@ import { BrowserRouter as Router, Switch, Redirect, NavLink } from 'react-router
 import { renderRoutes } from 'react-router-config';
 
 import router from '../router';
+import MusicPlayer from './play/MusicPlayer';
+import MusicMenu from './setting/Menu';
 
 import logo from '../assets/imgs/logo.png';
 import '../assets/stylus/reset.styl';
 import style from './App.styl?module';
-
-import MusicPlayer from './play/MusicPlayer';
+import '../utils/skin';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      menuShow: false,
+    };
   }
 
   render() {
@@ -21,7 +24,12 @@ class App extends React.Component {
       <Router>
         <div className={`${style.app} skin-app`}>
           <header className={`${style.appHeader} skin-app-header`}>
-            <i className={`icon-et-more ${style.appMore}`}></i>
+            <i
+              className={`icon-et-more ${style.appMore}`}
+              onClick={() => {
+                this.setState({ menuShow: true });
+              }}
+            ></i>
             <img src={logo} className={style.appLogo} alt="logo" />
             <h1 className={style.appTitle}>Music</h1>
           </header>
@@ -62,6 +70,12 @@ class App extends React.Component {
           </div>
 
           <MusicPlayer />
+          <MusicMenu
+            show={this.state.menuShow}
+            closeMenu={() => {
+              this.setState({ menuShow: false });
+            }}
+          />
         </div>
       </Router>
     );
