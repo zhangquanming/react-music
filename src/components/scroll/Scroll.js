@@ -6,16 +6,15 @@ import './scroll.styl';
 class Scroll extends React.Component {
   constructor(props) {
     super(props);
+
     this.scrollViewRef = React.createRef();
   }
-
   componentDidUpdate() {
     // 组件更新后，如果实例化了better-scroll并且需要刷新就调用refresh()函数
     if (this.bScroll && this.props.refresh === true) {
       this.bScroll.refresh();
     }
   }
-
   componentDidMount() {
     if (!this.bScroll) {
       this.bScroll = new BScroll(this.scrollViewRef.current, {
@@ -33,18 +32,15 @@ class Scroll extends React.Component {
       }
     }
   }
-
   componentWillUnmount() {
     this.bScroll.off('scroll');
     this.bScroll = null;
   }
-
   refresh() {
     if (this.bScroll) {
       this.bScroll.refresh();
     }
   }
-
   render() {
     return (
       <div className="scroll-view" ref={this.scrollViewRef}>
@@ -62,7 +58,7 @@ Scroll.defaultProps = {
   onScroll: null,
 };
 
-Scroll.propsTypes = {
+Scroll.propTypes = {
   direction: PropTypes.oneOf(['vertical', 'horizontal']),
   // 是否启用点击
   click: PropTypes.bool,

@@ -12,11 +12,12 @@ const withSuspense = Component => {
 
 const Recommend = withSuspense(lazy(() => import('../views/recommend/Recommend')));
 const Rankings = withSuspense(lazy(() => import('../views/ranking/Ranking')));
-const Singer = withSuspense(lazy(() => import('../views/singer/Singer')));
+const SingerList = withSuspense(lazy(() => import('../views/singer/SingerList')));
 const Search = withSuspense(lazy(() => import('../views/search/Search')));
 
 const Album = withSuspense(lazy(() => import('../containers/Album')));
 const Ranking = withSuspense(lazy(() => import('../containers/Ranking')));
+const Singer = withSuspense(lazy(() => import('../containers/Singer')));
 
 const router = [
   {
@@ -41,7 +42,13 @@ const router = [
   },
   {
     path: '/singer',
-    component: Singer,
+    component: SingerList,
+    routes: [
+      {
+        path: '/singer/:id',
+        component: Singer,
+      },
+    ],
   },
   {
     path: '/search',
